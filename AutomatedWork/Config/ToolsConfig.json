@@ -1,0 +1,8 @@
+﻿{
+	"ExportTools": {
+		"kritaPng": {
+			"Command": "krita {0} --export --export-filename {1}",
+			"TargetFileEnding": ".png"
+		}
+	}
+}

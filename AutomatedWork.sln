@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomatedWork", "AutomatedWork\AutomatedWork.csproj", "{9526B1E2-7D03-4554-89D8-D11F84BD57FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9526B1E2-7D03-4554-89D8-D11F84BD57FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9526B1E2-7D03-4554-89D8-D11F84BD57FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9526B1E2-7D03-4554-89D8-D11F84BD57FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9526B1E2-7D03-4554-89D8-D11F84BD57FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55125AC9-CBB8-4618-B894-7B7D01A7D816}
+	EndGlobalSection
+EndGlobal
