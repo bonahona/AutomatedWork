@@ -16,14 +16,19 @@ namespace AutomatedWork
 
         public const String BuildConfigFilePath = "Config/BuildConfig.json";
         public const String ToolsConfigFilePath = "Config/ToolsConfig.json";
+        public const String AssetsFilePath = "Config/Assets.json";
 
         public BuildConfig BuildConfig { get; set; }
         public ToolsConfig ToolsConfig { get; set; }
+        public AssetConfig AssetConfig { get; set; }
+
+        private DateTime LastRead = DateTime.MinValue;
 
         public Program(string[] args)
         {
             BuildConfig = JsonConvert.DeserializeObject<BuildConfig>(File.ReadAllText(BuildConfigFilePath));
             ToolsConfig = JsonConvert.DeserializeObject<ToolsConfig>(File.ReadAllText(ToolsConfigFilePath));
+            AssetConfig = JsonConvert.DeserializeObject<AssetConfig>(File.ReadAllText(AssetsFilePath));
 
             var watcher = new FileSystemWatcher();
             watcher.Path = BuildConfig.ProjectPath;
@@ -43,6 +48,11 @@ namespace AutomatedWork
 
         private void OnChanged(object source, FileSystemEventArgs e)
         {
+            var lastWriteTime = File.GetLastWriteTime(e.FullPath);
+            if(lastWriteTime == LastRead) {
+                return;
+            }
+
             if (e.Name.Contains("~")) {
                 return;
             }
@@ -55,11 +65,13 @@ namespace AutomatedWork
 
             Console.WriteLine("File {0} updated: {1}", e.Name, e.ChangeType);
             ExecuteTool(assetForFile, e.Name);
+
+            LastRead = lastWriteTime;
         }
 
         private Asset GetAssetForfile(String filename)
         {
-            foreach(var asset in BuildConfig.Assets.Values) {
+            foreach(var asset in AssetConfig.Assets.Values) {
                 if (filename.Contains(asset.File)) {
                     return asset;
                 }
@@ -86,19 +98,19 @@ namespace AutomatedWork
                 return;
             }
 
-            var command = String.Format(tool.Command, GetsourceFilname(filename), GetTargetFileName(filename, tool.TargetFileEnding));
-            Console.WriteLine(command);
-            var procStartInfo = new ProcessStartInfo(@"C:\Program Files\Git\bin\bash.exe", command);
-            //procStartInfo.RedirectStandardOutput = true;
-            //procStartInfo.UseShellExecute = false;
+            var command = String.Format(tool.Command, GetsourceFilname(filename), GetTargetFileName(asset, filename, tool.TargetFileEnding));
 
-            var proc = new Process { StartInfo = procStartInfo };
-            proc.Start();
-            //Console.WriteLine(proc.StandardOutput.ReadToEnd());
-            proc.WaitForExit(10000);
+            Console.WriteLine(command);
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.FileName = BuildConfig.ShellPath;
+            startInfo.Arguments = command;
+            process.StartInfo = startInfo;
+            process.Start();
         }
 
         private string GetsourceFilname(String filename) => filename.Split('.').First() + "." +  filename.Split('.')[1];
-        private string GetTargetFileName(String filename, String fileEnding) => filename.Split('.').First() + fileEnding;
+        private string GetTargetFileName(Asset asset, String filename, String fileEnding) => String.Format("{0}{1}{2}", BuildConfig.UnityProjectBase, asset.Target, filename.Split('.').First() + fileEnding);
     }
 }

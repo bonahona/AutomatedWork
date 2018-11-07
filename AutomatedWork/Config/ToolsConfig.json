@@ -1,7 +1,11 @@
 ﻿{
 	"ExportTools": {
+		"testCopy": {
+			"Command": "/C copy \"{0}\" \"{1}\"",
+			"TargetFileEnding": ".backup"
+		},
 		"kritaPng": {
-			"Command": "krita {0} --export --export-filename {1}",
+			"Command": "/C krita {0} --export --export-filename {1}",
 			"TargetFileEnding": ".png"
 		}
 	}

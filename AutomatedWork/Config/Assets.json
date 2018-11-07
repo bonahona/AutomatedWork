@@ -1,0 +1,14 @@
+﻿{
+	"Assets": {
+		"testFile": {
+			"File": "test.txt",
+			"Tool": "testCopy",
+			"Target": ""
+		},
+		"targetProps":{
+			"File": "TargetProps.kra",
+			"Tool": "kritaPng",
+			"Target": "Enemies\\TargetDummies\\"
+		}
+	}
+}

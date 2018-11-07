@@ -1,18 +1,5 @@
 ﻿{
 	"ProjectPath": ".",
-	"BashPath": "C:\\Program Files\\Git\\bin\\bash.exe",
-	"UnityProjectBase": "C:\\Users\\bjorn\\Documents\\Unity Pojects\\MageQuest\\Unity\\Game\\",
-	"ExportTools": {
-		"kritaPng": {
-			"Command": "krita {0} --export --export-filename {1}",
-			"TargetFileEnding": ".png"
-		}
-	},
-	"Assets":{
-		"targetProps":{
-			"File": "TargetProps.kra",
-			"Tool": "kritaPng",
-			"Target": "Enemies\\TargetDummies\\"
-		}
-	}
+	"ShellPath": "C:\\WINDOWS\\system32\\cmd.exe",
+	"UnityProjectBase": "C:\\Users\\bjorn\\Documents\\Unity Projects\\MageQuest\\Unity\\Assets\\Game\\",
 }
