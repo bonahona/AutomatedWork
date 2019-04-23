@@ -31,7 +31,7 @@ namespace AutomatedWork
             AssetConfig = JsonConvert.DeserializeObject<AssetConfig>(File.ReadAllText(AssetsFilePath));
 
             var watcher = new FileSystemWatcher();
-            watcher.Path = BuildConfig.ProjectPath;
+            watcher.Path = BuildConfig.RootPath + BuildConfig.WorldFolderPath;
             watcher.IncludeSubdirectories = true;
             watcher.Filter = "*.*";
 
@@ -57,6 +57,7 @@ namespace AutomatedWork
                 return;
             }
 
+            LastRead = lastWriteTime;
             var assetForFile = GetAssetForfile(e.Name);
 
             if(assetForFile == null) {
@@ -65,13 +66,11 @@ namespace AutomatedWork
 
             Console.WriteLine("File {0} updated: {1}", e.Name, e.ChangeType);
             ExecuteTool(assetForFile, e.Name);
-
-            LastRead = lastWriteTime;
         }
 
         private Asset GetAssetForfile(String filename)
         {
-            foreach(var asset in AssetConfig.Assets.Values) {
+            foreach(var asset in AssetConfig.Assets) {
                 if (filename.Contains(asset.File)) {
                     return asset;
                 }
@@ -110,7 +109,7 @@ namespace AutomatedWork
             process.Start();
         }
 
-        private string GetsourceFilname(String filename) => filename.Split('.').First() + "." +  filename.Split('.')[1];
-        private string GetTargetFileName(Asset asset, String filename, String fileEnding) => String.Format("{0}{1}{2}", BuildConfig.UnityProjectBase, asset.Target, filename.Split('.').First() + fileEnding);
+        private string GetsourceFilname(String filename) => String.Format("{0}{1}{2}",BuildConfig.RootPath, BuildConfig.WorldFolderPath, filename.Split('.').First() + "." +  filename.Split('.')[1]);
+        private string GetTargetFileName(Asset asset, String filename, String fileEnding) => String.Format("{0}{1}{2}{3}", BuildConfig.RootPath, BuildConfig.UnityProjectBase, asset.Target, Path.GetFileName(filename).Split('.').First() + fileEnding);
     }
 }

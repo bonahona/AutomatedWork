@@ -1,5 +1,7 @@
 ﻿{
 	"ProjectPath": ".",
 	"ShellPath": "C:\\WINDOWS\\system32\\cmd.exe",
-	"UnityProjectBase": "C:\\Users\\bjorn\\Documents\\Unity Projects\\MageQuest\\Unity\\Assets\\Game\\",
+	"RootPath": "C:\\Users\\bjorn\\Documents\\Unity Projects\\MageQuest\\",
+	"WorldFolderPath": "WorkFolder\\",
+	"UnityProjectBase": "Unity\\Assets\\Game\\",
 }

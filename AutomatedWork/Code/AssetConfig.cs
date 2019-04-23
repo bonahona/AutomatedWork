@@ -8,7 +8,7 @@ namespace AutomatedWork
 {
     public class AssetConfig
     {
-        public Dictionary<String, Asset> Assets { get; set; }
+        public List<Asset> Assets { get; set; }
     }
 
     public class Asset

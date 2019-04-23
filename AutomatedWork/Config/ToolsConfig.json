@@ -5,7 +5,7 @@
 			"TargetFileEnding": ".backup"
 		},
 		"kritaPng": {
-			"Command": "/C krita {0} --export --export-filename {1}",
+			"Command": "/C krita \"{0}\" --export --export-filename \"{1}\"",
 			"TargetFileEnding": ".png"
 		}
 	}

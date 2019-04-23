@@ -10,6 +10,8 @@ namespace AutomatedWork
     {
         public String ProjectPath { get; set; }
         public String ShellPath { get; set; }
+        public String RootPath { get; set; }
+        public String WorldFolderPath { get; set; }
         public String UnityProjectBase { get; set; }
     }
 }
